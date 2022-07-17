@@ -1,6 +1,6 @@
-import './App.css';
-import Header from './components/Header';
-import AddressBook from './pages/AddressBook';
+import './App.css'
+import Header from './components/Header'
+import AddressBook from './pages/AddressBook'
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <Header />
       <AddressBook />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
