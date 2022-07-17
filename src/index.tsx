@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+
+import './assets/font/Gotham-Font/GothamBold.ttf';
+import './assets/font/Gotham-Font/GothamLight.ttf';
+import './assets/font/Gotham-Font/GothamMedium.ttf';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
