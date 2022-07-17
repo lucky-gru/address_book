@@ -3,7 +3,7 @@
   background: white;
 }
 
-.header-content {
+.header__content {
   height: 80px;
   display: flex;
   align-items: center;

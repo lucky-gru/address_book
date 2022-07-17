@@ -1,0 +1,28 @@
+.address-book {
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  gap: 16px;
+  height: calc(100vh - 80px);
+}
+
+.address-book > div {
+  width: 50%;
+}
+
+.address-book__list {
+  border: 1px solid #e6e4d0;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.address-book__form {
+  border: 1px solid #e6e4d0;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.addres-book__button-wrap {
+  text-align: center;
+  margin-top: 30px;
+}
