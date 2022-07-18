@@ -4,9 +4,8 @@ import './style.css'
 import AddressItem from '../../components/AddressItem'
 import AddressForm from '../../components/App/AddressForm'
 import Button from '../../components/Button'
-import { Address } from '../../types'
+import { Address, AddressListItem } from '../../types'
 
-type AddressListItem = Address & { id: string };
 
 function AddressBook() {
   const [list, setList] = useState<AddressListItem[]>([
@@ -52,7 +51,7 @@ function AddressBook() {
         </div>
       </div>
       <div className="address-book__form">
-        <AddressForm submit={add} />
+        <AddressForm submit={add} list={list} />
       </div>
     </div>
   )

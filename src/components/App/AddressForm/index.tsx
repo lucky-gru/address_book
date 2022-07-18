@@ -3,8 +3,10 @@ import styled from 'styled-components'
 import { PropsValue } from 'react-select'
 import CountrySelector from '../../CountrySelector'
 import Button from '../../Button'
-import { Address } from '../../../types'
+import { Address, AddressListItem } from '../../../types'
 import { CountryOption } from '../../../types'
+import { addressFormValidate, isEqaulAddress } from '../../../utils'
+
 enum Mode {
   API,
   MANUAL,
@@ -97,10 +99,34 @@ const FormGroup = styled.div`
     font-size: 1rem;
   }
 `
-function AddressForm({ submit }: { submit: (newAddress: Address) => void }) {
+
+const Error = styled.span`
+  margin: 15px 0 0 10px;
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid #ff4c50;
+  color: #ff4c50;
+  font-size: 1rem;
+`
+function AddressForm({
+  submit,
+  list,
+}: {
+  submit: (newAddress: Address) => void
+  list: AddressListItem[]
+}) {
   const [mode, setMode] = useState<Mode>(Mode.MANUAL)
 
-  const [state, setState] = useState<Address>({
+  const initialValue = {
+    line1: '',
+    postcode: '',
+    town: '',
+    country: '',
+  }
+
+  const [state, setState] = useState<Address>(initialValue)
+
+  const [error, setError] = useState<Address>({
     line1: '',
     postcode: '',
     town: '',
@@ -111,21 +137,45 @@ function AddressForm({ submit }: { submit: (newAddress: Address) => void }) {
     PropsValue<CountryOption> | undefined
   >()
 
+  const [exist, setExist] = useState<boolean>(false)
+
   const handleChange = (event: React.BaseSyntheticEvent) => {
     event.persist()
     setState((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
     }))
+    setExist(false)
+    setError((prev) => ({
+      ...prev,
+      [event.target.name]: false,
+    }))
   }
 
   const handleCountry = (newValue: any) => {
     setState((prev) => ({ ...prev, country: newValue.label }))
     setCountry(newValue)
+    setError((prev) => ({ ...prev, country: '' }))
   }
 
   const handleSubmit = () => {
-    submit(state)
+    const { valid, error } = addressFormValidate(state)
+    if (valid) {
+      const exist = list.find((item: AddressListItem) => {
+        if (isEqaulAddress(item, { ...state, line2: '', line3: '' }))
+          return true
+        return false
+      })
+      if (exist) {
+        setExist(true)
+        return
+      }
+      submit(state)
+      setState(initialValue)
+      setCountry({ label: '', value: '' })
+    } else {
+      setError(error)
+    }
   }
 
   return (
@@ -158,7 +208,7 @@ function AddressForm({ submit }: { submit: (newAddress: Address) => void }) {
               name="line1"
               onChange={handleChange}
             />
-            <span>This field can't be empty</span>
+            {error.line1 && <span>{error.line1}</span>}
           </FormGroup>
           <FormGroup>
             <label>Postcode:</label>
@@ -168,6 +218,7 @@ function AddressForm({ submit }: { submit: (newAddress: Address) => void }) {
               name="postcode"
               onChange={handleChange}
             />
+            {error.postcode && <span>{error.postcode}</span>}
           </FormGroup>
           <FormGroup>
             <label>Town:</label>
@@ -177,11 +228,14 @@ function AddressForm({ submit }: { submit: (newAddress: Address) => void }) {
               name="town"
               onChange={handleChange}
             />
+            {error.town && <span>{error.town}</span>}
           </FormGroup>
           <FormGroup>
             <label>Country:</label>
             <CountrySelector country={country} setCountry={handleCountry} />
+            {error.country && <span>{error.country}</span>}
           </FormGroup>
+          {exist && <Error>The address exist already!</Error>}
         </Form>
       ) : null}
       <div className="addres-book__button-wrap">

@@ -7,6 +7,8 @@ export type Address = {
   country: string
 }
 
+export type AddressListItem = Address & { id: string }
+
 export type CountryOption = {
   label: string
   value: string
