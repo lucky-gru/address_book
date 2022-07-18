@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
 import styled from 'styled-components'
 import { PropsValue } from 'react-select'
 import CountrySelector from '../../CountrySelector'
 import Button from '../../Button'
 import { Address, AddressListItem } from '../../../types'
 import { CountryOption } from '../../../types'
+import { ReactComponent as SearchIcon } from '../../../assets/svg/search.svg'
 import { addressFormValidate, isEqaulAddress } from '../../../utils'
 
 enum Mode {
@@ -81,7 +82,6 @@ const FormGroup = styled.div`
     padding: 0 12px;
     border-radius: 21px;
     display: block;
-    box-shadow: none;
     background: #fff;
     border: 1px solid #c8c8c8;
     font-size: 1rem;
@@ -108,6 +108,54 @@ const Error = styled.span`
   color: #ff4c50;
   font-size: 1rem;
 `
+
+const Search = styled.div`
+  width: 100%;
+  height: 42px;
+
+  display: inline-flex;
+  border-radius: 21px;
+  background: #fff;
+  border: 1px solid #c8c8c8;
+  align-items: center;
+
+  & input {
+    height: 40px;
+    border: none;
+    width: 100%;
+    display: inline-flex;
+    outline: none;
+    border-radius: 21px;
+    padding-left: 21px;
+    font-size: 1rem;
+    font-family: 'Gotham';
+    font-weight: 500;
+    color: #343a40;
+  }
+
+  & span {
+    display: inline-flex;
+    margin-right: 10px;
+  }
+`
+
+const SearchWithAutoSuggestion = styled.div`
+  width: 100%;
+  display: block;
+  position: relative;
+`
+
+const SuggestionWrap = styled.div`
+  display: block;
+  position: absolute;
+  background: white;
+  z-index: 10;
+  width: 100%;
+  border: 1px solid #e6e4d0;
+  border-radius: 8px;
+  padding: 10px;
+`
+
 function AddressForm({
   submit,
   list,
@@ -133,11 +181,17 @@ function AddressForm({
     country: '',
   })
 
+  const searchRef = useRef<HTMLDivElement>(null)
+
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+
   const [country, setCountry] = useState<
     PropsValue<CountryOption> | undefined
   >()
 
   const [exist, setExist] = useState<boolean>(false)
+
+  const [search, setSearch] = useState<string>('')
 
   const handleChange = (event: React.BaseSyntheticEvent) => {
     event.persist()
@@ -176,6 +230,30 @@ function AddressForm({
     } else {
       setError(error)
     }
+  }
+
+  useEffect(() => {
+    const checkIfClickedOutside = (event: MouseEvent) => {
+      // If the menu is open and the clicked target is not within the menu,
+      // then close the menu
+      if (
+        isMenuOpen &&
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node | null)
+      ) {
+        setIsMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', checkIfClickedOutside)
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener('mousedown', checkIfClickedOutside)
+    }
+  }, [isMenuOpen])
+
+  const handleSearch = (event: BaseSyntheticEvent) => {
+    setSearch(event.target.value)
   }
 
   return (
@@ -237,7 +315,32 @@ function AddressForm({
           </FormGroup>
           {exist && <Error>The address exist already!</Error>}
         </Form>
-      ) : null}
+      ) : (
+        <Form>
+          <FormGroup>
+            <label>Search:</label>
+            <SearchWithAutoSuggestion ref={searchRef}>
+              <Search>
+                <input
+                  type="text"
+                  value={search}
+                  onChange={handleSearch}
+                  autoComplete="off"
+                />
+                <span>
+                  <SearchIcon />
+                </span>
+              </Search>
+              {isMenuOpen && (
+                <SuggestionWrap>
+                  <div>am okay</div>
+                  <div>am okay</div>
+                </SuggestionWrap>
+              )}
+            </SearchWithAutoSuggestion>
+          </FormGroup>
+        </Form>
+      )}
       <div className="addres-book__button-wrap">
         <Button onClick={handleSubmit}>Submit</Button>
       </div>
