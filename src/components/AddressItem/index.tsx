@@ -3,7 +3,7 @@ import { Address } from '../../types'
 
 const AddressFormWrap = styled.div<{ selected: boolean }>`
   border-bottom: 1px solid #e6e4d0;
-  margin-top: 8px;
+  padding-top: 12px;
   cursor: pointer;
   background: ${(props) => (props.selected ? '#ceca9b' : 'transparent')};
 

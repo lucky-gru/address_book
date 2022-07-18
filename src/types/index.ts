@@ -6,3 +6,8 @@ export type Address = {
   postcode: string
   country: string
 }
+
+export type CountryOption = {
+  label: string
+  value: string
+}

@@ -12,6 +12,7 @@ const Button = styled.span`
   color: #fff;
   font-weight: 500;
   cursor: pointer;
+  user-select: none;
 `
 
 export default Button;

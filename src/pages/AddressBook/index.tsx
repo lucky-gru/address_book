@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './style.css'
 import AddressItem from '../../components/AddressItem'
+import AddressForm from '../../components/App/AddressForm'
 import Button from '../../components/Button'
 import { Address } from '../../types'
 
@@ -13,14 +14,21 @@ function AddressBook() {
       country: 'US',
     },
   ])
-  const [selected, setSelected] = useState<string>('')
+  const [selected, setSelected] = useState<string>('');
+
+  const add = (newAddress: Address) => {
+    setList(prev => ([
+      ...prev,
+      newAddress
+    ]))
+  }
 
   return (
     <div className="container address-book">
       <div className="address-book__list">
         {list.map((item: Address) => (
           <AddressItem
-            key={item.postcode}
+            key={item.postcode+item.line1+item.town+item.country}
             {...item}
             onClick={() => {
               if (item.postcode === selected) {
@@ -36,7 +44,9 @@ function AddressBook() {
           {list.length > 0 && <Button>Select</Button>}
         </div>
       </div>
-      <div className="address-book__form"></div>
+      <div className="address-book__form">
+        <AddressForm submit={add}/>
+      </div>
     </div>
   )
 }
