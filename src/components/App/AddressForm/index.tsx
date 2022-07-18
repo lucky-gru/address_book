@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { PropsValue } from 'react-select'
 import CountrySelector from '../../CountrySelector'
 import Button from '../../Button'
 import { Address, AddressListItem } from '../../../types'
 import { CountryOption } from '../../../types'
-import { ReactComponent as SearchIcon } from '../../../assets/svg/search.svg'
+import AddressSearch from '../AddressSearch'
 import { addressFormValidate, isEqaulAddress } from '../../../utils'
 
 enum Mode {
@@ -109,53 +109,6 @@ const Error = styled.span`
   font-size: 1rem;
 `
 
-const Search = styled.div`
-  width: 100%;
-  height: 42px;
-
-  display: inline-flex;
-  border-radius: 21px;
-  background: #fff;
-  border: 1px solid #c8c8c8;
-  align-items: center;
-
-  & input {
-    height: 40px;
-    border: none;
-    width: 100%;
-    display: inline-flex;
-    outline: none;
-    border-radius: 21px;
-    padding-left: 21px;
-    font-size: 1rem;
-    font-family: 'Gotham';
-    font-weight: 500;
-    color: #343a40;
-  }
-
-  & span {
-    display: inline-flex;
-    margin-right: 10px;
-  }
-`
-
-const SearchWithAutoSuggestion = styled.div`
-  width: 100%;
-  display: block;
-  position: relative;
-`
-
-const SuggestionWrap = styled.div`
-  display: block;
-  position: absolute;
-  background: white;
-  z-index: 10;
-  width: 100%;
-  border: 1px solid #e6e4d0;
-  border-radius: 8px;
-  padding: 10px;
-`
-
 function AddressForm({
   submit,
   list,
@@ -190,8 +143,6 @@ function AddressForm({
   >()
 
   const [exist, setExist] = useState<boolean>(false)
-
-  const [search, setSearch] = useState<string>('')
 
   const handleChange = (event: React.BaseSyntheticEvent) => {
     event.persist()
@@ -251,10 +202,6 @@ function AddressForm({
       document.removeEventListener('mousedown', checkIfClickedOutside)
     }
   }, [isMenuOpen])
-
-  const handleSearch = (event: BaseSyntheticEvent) => {
-    setSearch(event.target.value)
-  }
 
   return (
     <div>
@@ -319,25 +266,7 @@ function AddressForm({
         <Form>
           <FormGroup>
             <label>Search:</label>
-            <SearchWithAutoSuggestion ref={searchRef}>
-              <Search>
-                <input
-                  type="text"
-                  value={search}
-                  onChange={handleSearch}
-                  autoComplete="off"
-                />
-                <span>
-                  <SearchIcon />
-                </span>
-              </Search>
-              {isMenuOpen && (
-                <SuggestionWrap>
-                  <div>am okay</div>
-                  <div>am okay</div>
-                </SuggestionWrap>
-              )}
-            </SearchWithAutoSuggestion>
+            <AddressSearch />
           </FormGroup>
         </Form>
       )}
