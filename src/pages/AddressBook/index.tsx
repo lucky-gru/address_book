@@ -20,6 +20,10 @@ function AddressBook() {
     ])
   }
 
+  const handleSelect = () => {
+    alert(`Do you like it?`)
+  }
+
   return (
     <div className="container address-book">
       <div className="address-book__list">
@@ -47,7 +51,7 @@ function AddressBook() {
           </div>
         )}
         <div className="addres-book__button-wrap">
-          {list.length > 0 && <Button>Select</Button>}
+          {list.length > 0 && <Button onClick={handleSelect}>Select</Button>}
         </div>
       </div>
       <div className="address-book__form">

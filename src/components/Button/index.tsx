@@ -13,6 +13,10 @@ const Button = styled.span`
   font-weight: 500;
   cursor: pointer;
   user-select: none;
+
+  &:hover {
+    background: #bb0f13;
+  }
 `
 
-export default Button;
+export default Button

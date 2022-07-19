@@ -6,6 +6,7 @@ const AddressFormWrap = styled.div<{ selected: boolean }>`
   padding-top: 12px;
   cursor: pointer;
   background: ${(props) => (props.selected ? '#ceca9b' : 'transparent')};
+  text-align: left;
 
   &:hover {
     background: #ceca9b;
@@ -31,9 +32,9 @@ function AddressItem({
 }: Address & { selected: boolean; onClick: () => void }) {
   return (
     <AddressFormWrap selected={selected ? true : false} onClick={onClick}>
-      <h5>{line1}</h5>
-      <h5>{line2 ? line2 : ''}</h5>
-      <h5>{line3 ? line3 : ''}</h5>
+      <h5>Address Line 1 : {line1}</h5>
+      <h5>{line2 ? `Address Line 2 ${line2} :` : ''}</h5>
+      <h5>{line3 ? `Address Line 3 ${line3} :` : ''}</h5>
       <h5>
         <span>{postcode}</span>&nbsp;<span>{town}</span>&nbsp;
         <span>{country}</span>
