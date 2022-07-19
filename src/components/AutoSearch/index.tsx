@@ -2,6 +2,7 @@ import { useEffect, useRef, BaseSyntheticEvent } from 'react'
 import styled from 'styled-components'
 import SearchBox from '../SearchBox'
 import AddressItem from '../AddressItem'
+import { Address } from '../../types'
 
 const SearchWithAutoSuggestion = styled.div`
   width: 100%;
@@ -43,12 +44,14 @@ const AutoSearch = ({
   suggestions,
   isMenuOpen,
   setIsMenuOpen,
+  selectSuggestion,
 }: {
   search: string
   handleSearch: (event: BaseSyntheticEvent) => void
   suggestions: any[]
   isMenuOpen: boolean
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+  selectSuggestion: (address: Address) => void
 }) => {
   const searchRef = useRef<HTMLDivElement>(null)
 
@@ -76,6 +79,11 @@ const AutoSearch = ({
     setIsMenuOpen((prev) => !prev)
   }
 
+  const handleClick = (item: Address) => () => {
+    selectSuggestion(item)
+    setIsMenuOpen(false)
+  }
+
   return (
     <SearchWithAutoSuggestion ref={searchRef}>
       <SearchBox
@@ -86,12 +94,12 @@ const AutoSearch = ({
       {isMenuOpen && (
         <SuggestionWrap>
           {suggestions?.length > 0 &&
-            suggestions.map((item, index) => (
+            suggestions.map((item: Address, index: number) => (
               <AddressItem
                 key={index}
                 {...item}
                 selected={false}
-                onClick={() => {}}
+                onClick={handleClick(item)}
               />
             ))}
         </SuggestionWrap>

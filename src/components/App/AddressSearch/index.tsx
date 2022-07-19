@@ -4,7 +4,11 @@ import { useDebounce } from '../../../hooks'
 import { getAddress } from '../../../services'
 import { Address } from '../../../types'
 
-const AddressSearch = () => {
+const AddressSearch = ({
+  selectSuggestion,
+}: {
+  selectSuggestion: (address: Address) => void
+}) => {
   const [search, setSearch] = useState<string>('')
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [suggestions, setSuggestions] = useState<Address[]>([])
@@ -50,6 +54,7 @@ const AddressSearch = () => {
       isMenuOpen={isMenuOpen}
       setIsMenuOpen={setIsMenuOpen}
       suggestions={suggestions}
+      selectSuggestion={selectSuggestion}
     ></AutoSearch>
   )
 }

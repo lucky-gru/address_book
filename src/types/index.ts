@@ -13,3 +13,8 @@ export type CountryOption = {
   label: string
   value: string
 }
+
+export enum Mode {
+  API,
+  MANUAL,
+}

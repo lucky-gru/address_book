@@ -6,13 +6,8 @@ import { Address, AddressListItem } from '../../../types'
 import AddressSearch from '../AddressSearch'
 import { addressFormValidate, isEqaulAddress } from '../../../utils'
 import { Form, FormGroup } from '../../Form'
-import { CountryOption } from '../../../types'
+import { CountryOption, Mode } from '../../../types'
 import AddressForm from '../AddressForm'
-
-enum Mode {
-  API,
-  MANUAL,
-}
 
 const ButtonGroup = styled.div`
   display: inline-flex;
@@ -60,7 +55,6 @@ const ButtonGrouped = styled.button<{ selected: boolean }>`
     border-bottom-left-radius: 0;
   }
 `
-
 function AddressRegister({
   submit,
   list,
@@ -72,6 +66,8 @@ function AddressRegister({
 
   const initialValue = {
     line1: '',
+    line2: '',
+    line3: '',
     postcode: '',
     town: '',
     country: '',
@@ -79,12 +75,7 @@ function AddressRegister({
 
   const [state, setState] = useState<Address>(initialValue)
 
-  const [error, setError] = useState<Address>({
-    line1: '',
-    postcode: '',
-    town: '',
-    country: '',
-  })
+  const [error, setError] = useState<Address>(initialValue)
 
   const searchRef = useRef<HTMLDivElement>(null)
 
@@ -135,6 +126,10 @@ function AddressRegister({
     }
   }
 
+  const selectSuggestion = (address: Address) => {
+    setState(address)
+  }
+
   useEffect(() => {
     const checkIfClickedOutside = (event: MouseEvent) => {
       // If the menu is open and the clicked target is not within the menu,
@@ -175,23 +170,25 @@ function AddressRegister({
           API
         </ButtonGrouped>
       </ButtonGroup>
-      {mode === Mode.MANUAL ? (
-        <AddressForm
-          country={country}
-          handleCountry={handleCountry}
-          exist={exist}
-          state={state}
-          error={error}
-          handleChange={handleChange}
-        />
-      ) : (
-        <Form>
+      <Form>
+        {mode === Mode.API && (
           <FormGroup>
             <label>Search:</label>
-            <AddressSearch />
+            <AddressSearch selectSuggestion={selectSuggestion} />
           </FormGroup>
-        </Form>
-      )}
+        )}
+        {(mode === Mode.MANUAL || state.postcode) && (
+          <AddressForm
+            mode={mode}
+            country={country}
+            handleCountry={handleCountry}
+            exist={exist}
+            state={state}
+            error={error}
+            handleChange={handleChange}
+          />
+        )}
+      </Form>
       <div className="addres-book__button-wrap">
         <Button onClick={handleSubmit}>Submit</Button>
       </div>

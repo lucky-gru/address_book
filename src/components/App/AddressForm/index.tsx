@@ -1,23 +1,25 @@
 import { Form, FormGroup, Error } from '../../Form'
 import { Address } from '../../../types'
 import CountrySelector from '../../CountrySelector'
-import { CountryOption } from '../../../types'
+import { CountryOption, Mode } from '../../../types'
 import { PropsValue } from 'react-select'
 
 const AddressForm = ({
+  mode,
   state,
   error,
   country,
   handleChange,
   handleCountry,
-  exist
+  exist,
 }: {
-    state: Address
-    error: Address
-    handleChange: (event: React.BaseSyntheticEvent) => void
-    country: PropsValue<CountryOption> | undefined,
-    handleCountry: (newValue: any) => void
-    exist: boolean
+  mode: Mode
+  state: Address
+  error: Address
+  handleChange: (event: React.BaseSyntheticEvent) => void
+  country: PropsValue<CountryOption> | undefined
+  handleCountry: (newValue: any) => void
+  exist: boolean
 }) => {
   return (
     <Form>
@@ -27,10 +29,33 @@ const AddressForm = ({
           type="text"
           value={state.line1}
           name="line1"
+          disabled={mode === Mode.API}
           onChange={handleChange}
         />
         {error.line1 && <span>{error.line1}</span>}
       </FormGroup>
+      {mode === Mode.API && (
+        <>
+          <FormGroup>
+            <label>Address Line2:</label>
+            <input
+              type="text"
+              value={state.line2}
+              name="line2"
+              disabled={mode === Mode.API}
+            />
+          </FormGroup>
+          <FormGroup>
+            <label>Address Line3:</label>
+            <input
+              type="text"
+              value={state.line3}
+              name="line3"
+              disabled={mode === Mode.API}
+            />
+          </FormGroup>
+        </>
+      )}
       <FormGroup>
         <label>Postcode:</label>
         <input
@@ -38,6 +63,7 @@ const AddressForm = ({
           value={state.postcode}
           name="postcode"
           onChange={handleChange}
+          disabled={mode === Mode.API}
         />
         {error.postcode && <span>{error.postcode}</span>}
       </FormGroup>
@@ -48,12 +74,17 @@ const AddressForm = ({
           value={state.town}
           name="town"
           onChange={handleChange}
+          disabled={mode === Mode.API}
         />
         {error.town && <span>{error.town}</span>}
       </FormGroup>
       <FormGroup>
         <label>Country:</label>
-        <CountrySelector country={country} setCountry={handleCountry} />
+        {mode === Mode.API && state.country ? (
+          <span>{state.country}</span>
+        ) : (
+          <CountrySelector country={country} setCountry={handleCountry} />
+        )}
         {error.country && <span>{error.country}</span>}
       </FormGroup>
       {exist && <Error>The address exist already!</Error>}
