@@ -55,6 +55,7 @@ const AddressSearch = ({
       setIsMenuOpen={setIsMenuOpen}
       suggestions={suggestions}
       selectSuggestion={selectSuggestion}
+      placeholder="postcode"
     ></AutoSearch>
   )
 }

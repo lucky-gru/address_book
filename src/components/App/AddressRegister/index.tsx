@@ -103,6 +103,7 @@ function AddressRegister({
   const handleCountry = (newValue: any) => {
     setState((prev) => ({ ...prev, country: newValue.label }))
     setCountry(newValue)
+    setExist(false)
     setError((prev) => ({ ...prev, country: '' }))
   }
 
@@ -128,6 +129,14 @@ function AddressRegister({
 
   const selectSuggestion = (address: Address) => {
     setState(address)
+    setExist(false)
+  }
+
+  const handleMode = (newMode: Mode) => () => {
+    setMode(newMode)
+    setExist(false)
+    setError(initialValue)
+    setState(initialValue)
   }
 
   useEffect(() => {
@@ -155,17 +164,13 @@ function AddressRegister({
       <ButtonGroup>
         <ButtonGrouped
           selected={mode === Mode.MANUAL ? true : false}
-          onClick={() => {
-            setMode(Mode.MANUAL)
-          }}
+          onClick={handleMode(Mode.MANUAL)}
         >
           MANUAL
         </ButtonGrouped>
         <ButtonGrouped
           selected={mode === Mode.API ? true : false}
-          onClick={() => {
-            setMode(Mode.API)
-          }}
+          onClick={handleMode(Mode.API)}
         >
           API
         </ButtonGrouped>

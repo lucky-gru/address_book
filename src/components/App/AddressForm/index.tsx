@@ -1,8 +1,18 @@
+import { PropsValue } from 'react-select'
+import styled from 'styled-components'
 import { Form, FormGroup, Error } from '../../Form'
 import { Address } from '../../../types'
 import CountrySelector from '../../CountrySelector'
 import { CountryOption, Mode } from '../../../types'
-import { PropsValue } from 'react-select'
+
+const Country = styled.div`
+  border: 1px solid #343a40;
+  margin: 5px 0 0 10px;
+  padding: 2px 5px;
+  width: fit-content;
+  color: #343a40;
+  font-size: 18px;
+`
 
 const AddressForm = ({
   mode,
@@ -81,7 +91,7 @@ const AddressForm = ({
       <FormGroup>
         <label>Country:</label>
         {mode === Mode.API && state.country ? (
-          <span>{state.country}</span>
+          <Country>{state.country}</Country>
         ) : (
           <CountrySelector country={country} setCountry={handleCountry} />
         )}

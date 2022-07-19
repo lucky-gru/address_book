@@ -35,10 +35,12 @@ const SearchBox = ({
   search,
   handleSearch,
   toggleMenu,
+  placeholder,
 }: {
   search: string
   handleSearch: (event: BaseSyntheticEvent) => void
   toggleMenu: () => void | undefined
+  placeholder: string | undefined
 }) => {
   const handleFocus = () => {
     if (toggleMenu) {
@@ -50,6 +52,7 @@ const SearchBox = ({
       <input
         type="text"
         value={search}
+        placeholder={placeholder ? placeholder : ''}
         onChange={handleSearch}
         onFocus={handleFocus}
         autoComplete="off"

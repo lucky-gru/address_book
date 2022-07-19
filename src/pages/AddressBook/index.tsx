@@ -7,15 +7,7 @@ import Button from '../../components/Button'
 import { Address, AddressListItem } from '../../types'
 
 function AddressBook() {
-  const [list, setList] = useState<AddressListItem[]>([
-    {
-      id: uuidv4(),
-      line1: 'New York street',
-      postcode: '2342',
-      town: 'New York',
-      country: 'US',
-    },
-  ])
+  const [list, setList] = useState<AddressListItem[]>([])
   const [selected, setSelected] = useState<string>('')
 
   const add = (newAddress: Address) => {
@@ -31,6 +23,7 @@ function AddressBook() {
   return (
     <div className="container address-book">
       <div className="address-book__list">
+        <div className="address-book__list__title">Address Book</div>
         {list.map((item: AddressListItem) => (
           <AddressItem
             key={item.id}
@@ -45,6 +38,14 @@ function AddressBook() {
             selected={item.id === selected ? true : false}
           />
         ))}
+        {list.length === 0 && (
+          <div className="address-book__list__description">
+            <span>There aren't addreses booked.</span>
+            <br />
+            <br />
+            <span>You can add new addresses in the right box</span>
+          </div>
+        )}
         <div className="addres-book__button-wrap">
           {list.length > 0 && <Button>Select</Button>}
         </div>
