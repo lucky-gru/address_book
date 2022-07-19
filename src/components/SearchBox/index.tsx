@@ -34,16 +34,24 @@ const Search = styled.div`
 const SearchBox = ({
   search,
   handleSearch,
+  toggleMenu,
 }: {
   search: string
   handleSearch: (event: BaseSyntheticEvent) => void
+  toggleMenu: () => void | undefined
 }) => {
+  const handleFocus = () => {
+    if (toggleMenu) {
+      toggleMenu()
+    }
+  }
   return (
     <Search>
       <input
         type="text"
         value={search}
         onChange={handleSearch}
+        onFocus={handleFocus}
         autoComplete="off"
       />
       <span>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, BaseSyntheticEvent } from 'react'
 import styled from 'styled-components'
 import SearchBox from '../SearchBox'
+import AddressItem from '../AddressItem'
 
 const SearchWithAutoSuggestion = styled.div`
   width: 100%;
@@ -17,6 +18,23 @@ const SuggestionWrap = styled.div`
   border: 1px solid #e6e4d0;
   border-radius: 8px;
   padding: 10px;
+  height: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #d4aa70;
+    border-radius: 100px;
+  }
 `
 
 const AutoSearch = ({
@@ -30,7 +48,7 @@ const AutoSearch = ({
   handleSearch: (event: BaseSyntheticEvent) => void
   suggestions: any[]
   isMenuOpen: boolean
-  setIsMenuOpen: (newValue: boolean) => void
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const searchRef = useRef<HTMLDivElement>(null)
 
@@ -54,13 +72,28 @@ const AutoSearch = ({
     }
   }, [isMenuOpen, setIsMenuOpen])
 
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev)
+  }
+
   return (
     <SearchWithAutoSuggestion ref={searchRef}>
-      <SearchBox search={search} handleSearch={handleSearch} />
+      <SearchBox
+        search={search}
+        handleSearch={handleSearch}
+        toggleMenu={toggleMenu}
+      />
       {isMenuOpen && (
         <SuggestionWrap>
           {suggestions?.length > 0 &&
-            suggestions.map((item, index) => <div key={index}>ok</div>)}
+            suggestions.map((item, index) => (
+              <AddressItem
+                key={index}
+                {...item}
+                selected={false}
+                onClick={() => {}}
+              />
+            ))}
         </SuggestionWrap>
       )}
     </SearchWithAutoSuggestion>

@@ -6,7 +6,6 @@ import AddressForm from '../../components/App/AddressForm'
 import Button from '../../components/Button'
 import { Address, AddressListItem } from '../../types'
 
-
 function AddressBook() {
   const [list, setList] = useState<AddressListItem[]>([
     {
