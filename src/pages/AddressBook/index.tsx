@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import './style.css'
 import AddressItem from '../../components/AddressItem'
-import AddressForm from '../../components/App/AddressForm'
+import AddressForm from '../../components/App/AddressRegister'
 import Button from '../../components/Button'
 import { Address, AddressListItem } from '../../types'
 
