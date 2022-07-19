@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Requirements
 
-1. Please change .env.sample to .env
+1. Please change .env.example to .env
 2. Make sure to run API wrapper
    GetAddress.io doesn't allow CORS so this project need an API wrapper.
    The repo is [GetAddress.io API](https://github.com/lucky-gru/getaddressio_api_wrapper).
