@@ -37,7 +37,7 @@ const AddressSearch = ({
               setIsMenuOpen(false)
             }
           })
-          .catch((err) => {
+          .catch(() => {
             setSuggestions([])
             setIsMenuOpen(false)
           })

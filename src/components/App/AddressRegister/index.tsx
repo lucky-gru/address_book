@@ -96,7 +96,7 @@ function AddressRegister({
     }))
   }
 
-  const handleCountry = (newValue: any) => {
+  const handleCountry = (newValue: CountryOption) => {
     setState((prev) => ({ ...prev, country: newValue.label }))
     setCountry(newValue)
     setExist(false)
@@ -104,14 +104,14 @@ function AddressRegister({
   }
 
   const handleSubmit = () => {
-    const { valid, error } = addressFormValidate(state)
-    if (valid) {
-      const exist = list.find((item: AddressListItem) => {
+    const check = addressFormValidate(state)
+    if (check.valid) {
+      const found = list.find((item: AddressListItem) => {
         if (isEqualAddress(item, { ...state, line2: '', line3: '' }))
           return true
         return false
       })
-      if (exist) {
+      if (found) {
         setExist(true)
         return
       }
@@ -120,7 +120,7 @@ function AddressRegister({
       setError(initialValue)
       setCountry({ label: '', value: '' })
     } else {
-      setError(error)
+      setError(check.error)
     }
   }
 
