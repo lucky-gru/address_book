@@ -37,8 +37,8 @@ function AddressItem({
       onClick={onClick}
     >
       <h5 data-testid="line1">Address Line 1 : {line1}</h5>
-      <h5 data-testid="line2">{line2 ? `Address Line 2 ${line2} :` : ''}</h5>
-      <h5 data-testid="line3">{line3 ? `Address Line 3 ${line3} :` : ''}</h5>
+      <h5 data-testid="line2">{line2 ? `Address Line 2 : ${line2}` : ''}</h5>
+      <h5 data-testid="line3">{line3 ? `Address Line 3 : ${line3}` : ''}</h5>
       <h5>
         <span data-testid="postcode">{postcode}</span>&nbsp;
         <span data-testid="town">{town}</span>&nbsp;
