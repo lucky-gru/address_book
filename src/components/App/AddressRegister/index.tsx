@@ -77,10 +77,6 @@ function AddressRegister({
 
   const [error, setError] = useState<Address>(initialValue)
 
-  const searchRef = useRef<HTMLDivElement>(null)
-
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-
   const [country, setCountry] = useState<
     PropsValue<CountryOption> | undefined
   >()
@@ -121,6 +117,7 @@ function AddressRegister({
       }
       submit(state)
       setState(initialValue)
+      setError(initialValue)
       setCountry({ label: '', value: '' })
     } else {
       setError(error)
@@ -128,8 +125,9 @@ function AddressRegister({
   }
 
   const selectSuggestion = (address: Address) => {
-    setState(address)
     setExist(false)
+    setState(address)
+    setError(initialValue)
   }
 
   const handleMode = (newMode: Mode) => () => {
@@ -138,26 +136,6 @@ function AddressRegister({
     setError(initialValue)
     setState(initialValue)
   }
-
-  useEffect(() => {
-    const checkIfClickedOutside = (event: MouseEvent) => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
-      if (
-        isMenuOpen &&
-        searchRef.current &&
-        !searchRef.current.contains(event.target as Node | null)
-      ) {
-        setIsMenuOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', checkIfClickedOutside)
-
-    return () => {
-      // Cleanup the event listener
-      document.removeEventListener('mousedown', checkIfClickedOutside)
-    }
-  }, [isMenuOpen])
 
   return (
     <div>
