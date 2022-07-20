@@ -4,7 +4,7 @@ import { PropsValue } from 'react-select'
 import Button from '../../Button'
 import { Address, AddressListItem } from '../../../types'
 import AddressSearch from '../AddressSearch'
-import { addressFormValidate, isEqaulAddress } from '../../../utils'
+import { addressFormValidate, isEqualAddress } from '../../../utils'
 import { Form, FormGroup } from '../../Form'
 import { CountryOption, Mode } from '../../../types'
 import AddressForm from '../AddressForm'
@@ -107,7 +107,7 @@ function AddressRegister({
     const { valid, error } = addressFormValidate(state)
     if (valid) {
       const exist = list.find((item: AddressListItem) => {
-        if (isEqaulAddress(item, { ...state, line2: '', line3: '' }))
+        if (isEqualAddress(item, { ...state, line2: '', line3: '' }))
           return true
         return false
       })

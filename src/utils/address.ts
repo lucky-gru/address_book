@@ -1,6 +1,6 @@
 import { Address, AddressListItem } from '../types';
 
-export const isEqaulAddress = (addr1: AddressListItem, addr2: Address): boolean => {
+export const isEqualAddress = (addr1: AddressListItem, addr2: Address): boolean => {
 
   const cloneAddr1 = { ...addr1 } as Address & { id?: string };
   delete cloneAddr1.id;

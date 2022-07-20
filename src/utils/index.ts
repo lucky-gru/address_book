@@ -1,2 +1,2 @@
 export { addressFormValidate } from './validator';
-export { isEqaulAddress } from './address';
+export { isEqualAddress } from './address';

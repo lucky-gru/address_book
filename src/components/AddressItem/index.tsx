@@ -31,13 +31,14 @@ function AddressItem({
   onClick,
 }: Address & { selected: boolean; onClick: () => void }) {
   return (
-    <AddressFormWrap selected={selected ? true : false} onClick={onClick}>
-      <h5>Address Line 1 : {line1}</h5>
-      <h5>{line2 ? `Address Line 2 ${line2} :` : ''}</h5>
-      <h5>{line3 ? `Address Line 3 ${line3} :` : ''}</h5>
+    <AddressFormWrap data-testid="addressItem" selected={selected ? true : false} onClick={onClick}>
+      <h5 data-testid="line1">Address Line 1 : {line1}</h5>
+      <h5 data-testid="line2">{line2 ? `Address Line 2 ${line2} :` : ''}</h5>
+      <h5 data-testid="line3">{line3 ? `Address Line 3 ${line3} :` : ''}</h5>
       <h5>
-        <span>{postcode}</span>&nbsp;<span>{town}</span>&nbsp;
-        <span>{country}</span>
+        <span data-testid="postcode">{postcode}</span>&nbsp;
+        <span data-testid="town">{town}</span>&nbsp;
+        <span data-testid="country">{country}</span>
       </h5>
     </AddressFormWrap>
   )
