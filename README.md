@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
    GetAddress.io doesn't allow CORS so this project needs an API wrapper.
    The repo is [GetAddress.io API](https://github.com/lucky-gru/getaddressio_api_wrapper).
 3. After that, you need to specify the API wrapper to get addresses from getaddress.io
-   for example REACT_APP_API='http://localhost:1337/'
+   for example REACT_APP_API='http://localhost:1337'
 
 ## Available Scripts
 
