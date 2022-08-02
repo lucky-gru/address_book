@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom/client'
-import 'normalize.css'
 import './index.css'
 
 import './assets/font/Gotham-Font/GothamBold.ttf'
