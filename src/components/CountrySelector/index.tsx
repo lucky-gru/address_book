@@ -1,13 +1,20 @@
 import { useMemo } from 'react'
-import Select, { PropsValue, StylesConfig } from 'react-select'
+import Select, {
+  CSSObjectWithLabel,
+  PropsValue,
+  StylesConfig,
+} from 'react-select'
 import countryList from 'react-select-country-list'
 import { CountryOption } from '../../types'
 
 const customStyles: StylesConfig<string, false, any> = {
-  control: (provided) => ({
+  control: (provided: CSSObjectWithLabel) => ({
     ...provided,
-    // borderRadius: '21px',
-    // height: '42px',
+    fontFamily: ` -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif`,
+    borderRadius: '21px',
+    height: '42px',
   }),
 }
 
