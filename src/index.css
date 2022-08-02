@@ -1,3 +1,5 @@
+@import-normalize;
+
 @font-face {
   font-family: 'GothamBold'; /*Can be any text*/
   src: local('GothamBold'),
