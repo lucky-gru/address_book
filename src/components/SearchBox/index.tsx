@@ -1,6 +1,8 @@
 import { BaseSyntheticEvent } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as SearchIcon } from '../../assets/svg/search.svg'
+import { ReactComponent as LoadingIcon } from '../../assets/svg/loading.svg'
+
 const Search = styled.div`
   width: 100%;
   height: 42px;
@@ -36,11 +38,13 @@ const SearchBox = ({
   handleSearch,
   toggleMenu,
   placeholder,
+  loading,
 }: {
   search: string
   handleSearch: (event: BaseSyntheticEvent) => void
   toggleMenu: () => void | undefined
   placeholder: string | undefined
+  loading: boolean
 }) => {
   const handleFocus = () => {
     if (toggleMenu) {
@@ -57,9 +61,7 @@ const SearchBox = ({
         onFocus={handleFocus}
         autoComplete="off"
       />
-      <span>
-        <SearchIcon />
-      </span>
+      <span>{loading ? <LoadingIcon /> : <SearchIcon />}</span>
     </Search>
   )
 }

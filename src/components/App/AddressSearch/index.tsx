@@ -13,6 +13,7 @@ const AddressSearch = ({
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [suggestions, setSuggestions] = useState<Address[]>([])
   const debouncedSearchTerm = useDebounce(search, 500)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleSearch = (event: BaseSyntheticEvent) => {
     setSearch(event.target.value)
@@ -22,6 +23,7 @@ const AddressSearch = ({
   useEffect(
     () => {
       if (debouncedSearchTerm) {
+        setLoading(true)
         getAddress(debouncedSearchTerm)
           .then(async (response) => {
             const data = await response.json()
@@ -36,10 +38,12 @@ const AddressSearch = ({
               setSuggestions([])
               setIsMenuOpen(false)
             }
+            setLoading(false)
           })
           .catch(() => {
             setSuggestions([])
             setIsMenuOpen(false)
+            setLoading(false)
           })
       } else {
       }
@@ -56,6 +60,7 @@ const AddressSearch = ({
       suggestions={suggestions}
       selectSuggestion={selectSuggestion}
       placeholder="postcode"
+      loading={loading}
     ></AutoSearch>
   )
 }

@@ -46,6 +46,7 @@ const AutoSearch = ({
   setIsMenuOpen,
   selectSuggestion,
   placeholder,
+  loading,
 }: {
   search: string
   handleSearch: (event: BaseSyntheticEvent) => void
@@ -54,6 +55,7 @@ const AutoSearch = ({
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
   selectSuggestion: (address: Address) => void
   placeholder: string | undefined
+  loading: boolean
 }) => {
   const searchRef = useRef<HTMLDivElement>(null)
 
@@ -93,6 +95,7 @@ const AutoSearch = ({
         placeholder={placeholder}
         handleSearch={handleSearch}
         toggleMenu={toggleMenu}
+        loading={loading}
       />
       {isMenuOpen && (
         <SuggestionWrap>
