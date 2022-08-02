@@ -29,20 +29,13 @@ const AddressSearch = ({
             const data = await response.json()
             if (data.status === 200) {
               setSuggestions(data.addresses)
-              if (data.addresses.length > 0) {
-                setIsMenuOpen(true)
-              } else {
-                setIsMenuOpen(false)
-              }
             } else {
               setSuggestions([])
-              setIsMenuOpen(false)
             }
             setLoading(false)
           })
           .catch(() => {
             setSuggestions([])
-            setIsMenuOpen(false)
             setLoading(false)
           })
       } else {
