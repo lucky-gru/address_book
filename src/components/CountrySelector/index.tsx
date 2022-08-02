@@ -6,7 +6,7 @@ import { CountryOption } from '../../types'
 const customStyles: StylesConfig<string, false, any> = {
   control: (provided) => ({
     ...provided,
-    borderRadius: '21px',
+    // borderRadius: '21px',
     // height: '42px',
   }),
 }
