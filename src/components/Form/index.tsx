@@ -13,6 +13,10 @@ export const FormGroup = styled.div`
     font-weight: 500;
     display: block;
     margin: 0 0 5px 15px;
+    & span {
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
   }
 
   & > input[type='text'] {

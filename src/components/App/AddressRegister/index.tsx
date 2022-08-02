@@ -156,7 +156,9 @@ function AddressRegister({
       <Form>
         {mode === Mode.API && (
           <FormGroup>
-            <label>Search:</label>
+            <label>
+              Search: <span>e.g. nn13er</span>
+            </label>
             <AddressSearch selectSuggestion={selectSuggestion} />
           </FormGroup>
         )}
