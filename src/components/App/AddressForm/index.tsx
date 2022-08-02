@@ -5,14 +5,13 @@ import { Address } from '../../../types'
 import CountrySelector from '../../CountrySelector'
 import { CountryOption, Mode } from '../../../types'
 
-const Country = styled.span`
+const Country = styled.div`
   border: 1px solid #343a40;
   margin: 5px 0 0 10px;
   padding: 2px 5px;
-  width: fit-content;
+  width: max-content;
   color: #343a40;
   font-size: 18px;
-  display: inline;
 `
 
 const AddressForm = ({
@@ -92,9 +91,7 @@ const AddressForm = ({
       <FormGroup>
         <label>Country:</label>
         {mode === Mode.API && state.country ? (
-          <div>
-            <Country>{state.country}</Country>
-          </div>
+          <Country>{state.country}</Country>
         ) : (
           <CountrySelector country={country} setCountry={handleCountry} />
         )}

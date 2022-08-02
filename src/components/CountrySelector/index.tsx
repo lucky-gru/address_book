@@ -7,7 +7,7 @@ const customStyles: StylesConfig<string, false, any> = {
   control: (provided) => ({
     ...provided,
     borderRadius: '21px',
-    height: '42px',
+    // height: '42px',
   }),
 }
 
