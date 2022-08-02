@@ -29,7 +29,6 @@ export const FormGroup = styled.div`
     background: #fff;
     border: 1px solid #c8c8c8;
     font-size: 1rem;
-    font-family: 'Gotham';
     font-weight: 500;
     color: #343a40;
   }
