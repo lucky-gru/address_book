@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const Form = styled.div`
-  margin-top: 24px;
+  padding-top: 10px;
+  margin-top: 10px;
 `
 export const FormGroup = styled.div`
   margin-bottom: 1rem;
