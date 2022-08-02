@@ -5,7 +5,7 @@ import { Address } from '../../../types'
 import CountrySelector from '../../CountrySelector'
 import { CountryOption, Mode } from '../../../types'
 
-const Country = styled.div`
+const Country = styled.span`
   border: 1px solid #343a40;
   margin: 5px 0 0 10px;
   padding: 2px 5px;
