@@ -12,6 +12,7 @@ const Country = styled.div`
   width: fit-content;
   color: #343a40;
   font-size: 18px;
+  display: inline;
 `
 
 const AddressForm = ({
@@ -91,7 +92,9 @@ const AddressForm = ({
       <FormGroup>
         <label>Country:</label>
         {mode === Mode.API && state.country ? (
-          <Country>{state.country}</Country>
+          <div>
+            <Country>{state.country}</Country>
+          </div>
         ) : (
           <CountrySelector country={country} setCountry={handleCountry} />
         )}

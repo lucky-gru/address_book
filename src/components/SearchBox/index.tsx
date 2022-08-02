@@ -22,7 +22,6 @@ const Search = styled.div`
     border-radius: 21px;
     padding-left: 21px;
     font-size: 1rem;
-    font-family: 'Gotham';
     font-weight: 500;
     color: #343a40;
   }

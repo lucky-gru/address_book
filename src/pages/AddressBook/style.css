@@ -46,6 +46,10 @@
   font-size: 16px;
 }
 
+.address-book__list__description p {
+  padding-bottom: 16px;
+}
+
 .address-book__form {
   border: 1px solid #e6e4d0;
   border-radius: 8px;
