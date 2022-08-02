@@ -44,10 +44,8 @@ function AddressBook() {
         ))}
         {list.length === 0 && (
           <div className="address-book__list__description">
-            <span>There aren't addreses booked.</span>
-            <br />
-            <br />
-            <span>You can add new addresses in the right box</span>
+            <p>There aren't addreses booked.</p>
+            <p>You can add new addresses in the right box</p>
           </div>
         )}
         <div className="addres-book__button-wrap">
